@@ -1,15 +1,23 @@
-const ingredients = [
-  "Potatoes",
-  "Mushrooms",
-  "Garlic",
-  "Tomatos",
-  "Herbs",
-  "Condiments",
-];
+class Storage {
+  #items;
+  constructor([...items]) {
+    this.#items = [...items];
+  }
 
-ingredients.forEach((item) => {
-  const ingredientList = document.querySelector("#ingredients");
-  const ingredientItem = document.createElement("li");
-  ingredientItem.textContent = item;
-  ingredientList.append(ingredientItem);
-});
+  getItems() {
+    return this.#items;
+  }
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
+  removeItem(itemToRemove) {
+    this.#items = this.#items.filter((item) => item !== itemToRemove);
+  }
+}
+
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
